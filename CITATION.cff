@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+title: "Daniels Admissions Agent — AI-powered admissions advisor for Purdue's Mitch Daniels School of Business"
+message: "If you reference this project, please cite as below."
+type: software
+authors:
+  - family-names: "Monowara"
+    given-names: "Syeda"
+    email: "smonowar@purdue.edu"
+    affiliation: "Purdue University, Mitch Daniels School of Business"
+  - family-names: "Roy"
+    given-names: "Aritrika"
+    affiliation: "Purdue University, Mitch Daniels School of Business"
+repository-code: "https://github.com/meownager/etb-daniels-admissions-agent"
+url: "https://meownager.github.io/etb-daniels-admissions-agent/"
+abstract: >
+  An AI-powered admissions advisor for Purdue's Mitch Daniels School of Business
+  graduate programs. Combines a Voiceflow user-facing chat agent with a parallel
+  LangChain + LangSmith Python observability pipeline. Built on a 77-chunk
+  knowledge base covering 13 graduate programs, 5 applicant personas, and
+  24 career-goal routing paths. Final project for MGMT 59000-ETB
+  (Spring 2026), instructed by Rohit Aggarwal.
+keywords:
+  - retrieval-augmented-generation
+  - rag
+  - langchain
+  - langsmith
+  - voiceflow
+  - anthropic-claude
+  - chromadb
+  - admissions
+  - higher-education
+  - conversational-ai
+license: MIT
+date-released: 2026-04-26
