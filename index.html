@@ -3,79 +3,111 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Daniels Voice Admissions Agent — ETB Student Project</title>
+<title>Daniels Admissions Agent — ETB Student Project</title>
+<meta name="description" content="AI-powered admissions advisor for Purdue's Mitch Daniels School of Business graduate programs. Built for the ETB course." />
 <style>
   :root {
     --gold: #CEB888;
+    --gold-light: #e6d6ad;
     --black: #000000;
     --bg: #faf9f6;
     --text: #1a1a1a;
     --muted: #555;
     --card: #ffffff;
     --border: #e2e2e2;
+    --shadow: 0 1px 3px rgba(0,0,0,0.08);
+    --shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: var(--bg);
     color: var(--text);
     line-height: 1.6;
   }
+
+  /* Disclaimer banner */
   .banner {
     background: #fff8e1;
     border-bottom: 1px solid #f0d97a;
     padding: 10px 20px;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     color: #5a4a00;
   }
+
+  /* Hero */
   header {
-    background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
+    background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 70%, #2a2418 100%);
     color: white;
-    padding: 60px 20px 50px;
+    padding: 70px 20px 60px;
     text-align: center;
     border-bottom: 4px solid var(--gold);
   }
   header h1 {
-    font-size: 2.4rem;
-    margin-bottom: 12px;
+    font-size: 2.6rem;
+    margin-bottom: 14px;
     color: var(--gold);
+    letter-spacing: -0.02em;
   }
-  header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    max-width: 640px;
-    margin: 0 auto;
+  header .tagline {
+    font-size: 1.15rem;
+    opacity: 0.92;
+    max-width: 680px;
+    margin: 0 auto 24px;
   }
-  main {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 20px;
+  header .modes {
+    display: inline-flex;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(206, 184, 136, 0.12);
+    border: 1px solid rgba(206, 184, 136, 0.4);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--gold-light);
   }
-  section { margin-bottom: 40px; }
+  header .modes span { display: inline-flex; align-items: center; gap: 6px; }
+
+  main { max-width: 920px; margin: 0 auto; padding: 50px 20px; }
+  section { margin-bottom: 56px; }
   h2 {
     color: var(--black);
     border-left: 4px solid var(--gold);
-    padding-left: 12px;
-    margin-bottom: 16px;
-    font-size: 1.4rem;
+    padding-left: 14px;
+    margin-bottom: 18px;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
   }
+  h2 .small {
+    font-size: 0.85rem;
+    font-weight: normal;
+    color: var(--muted);
+    margin-left: 8px;
+  }
+
+  /* Agent box (Voiceflow embed area) */
   .agent-box {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 30px;
+    border-radius: 12px;
+    padding: 32px;
     text-align: center;
-    min-height: 280px;
+    min-height: 240px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    box-shadow: var(--shadow-lg);
   }
   .agent-placeholder {
     color: var(--muted);
     font-style: italic;
+    font-size: 0.95rem;
   }
+  .agent-placeholder strong { color: var(--text); display: block; margin-bottom: 8px; font-style: normal; }
+
+  /* Quick prompts */
   .prompts {
     display: grid;
     grid-template-columns: 1fr;
@@ -88,20 +120,193 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-left: 3px solid var(--gold);
-    border-radius: 6px;
-    padding: 14px 16px;
+    border-radius: 8px;
+    padding: 14px 18px;
     font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    text-align: left;
+    width: 100%;
+    color: var(--text);
+    font-family: inherit;
   }
-  .prompt-card strong { display: block; color: var(--black); margin-bottom: 4px; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .prompt-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    border-left-color: var(--black);
+  }
+  .prompt-card .label {
+    display: block;
+    color: var(--muted);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  /* Resume upload section */
+  details.resume-section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+  details.resume-section summary {
+    padding: 16px 20px;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--text);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+  details.resume-section summary::-webkit-details-marker { display: none; }
+  details.resume-section summary::after {
+    content: "+";
+    font-size: 1.4rem;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+  }
+  details.resume-section[open] summary::after { transform: rotate(45deg); }
+  .resume-body {
+    padding: 0 20px 20px;
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+  .resume-body p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  textarea#resume-input {
+    width: 100%;
+    min-height: 140px;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    resize: vertical;
+  }
+  textarea#resume-input:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(206, 184, 136, 0.15);
+  }
+  button#send-resume {
+    margin-top: 12px;
+    padding: 10px 22px;
+    background: var(--black);
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.15s ease;
+  }
+  button#send-resume:hover { background: #2a2a2a; }
+  button#send-resume:disabled { background: #999; color: #ddd; border-color: #ddd; cursor: not-allowed; }
+  .toast {
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    display: none;
+  }
+  .toast.success { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; display: block; }
+  .toast.error { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; display: block; }
+
+  /* How it works */
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  @media (min-width: 768px) {
+    .steps { grid-template-columns: repeat(3, 1fr); }
+  }
+  .step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 22px;
+    text-align: left;
+  }
+  .step .num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: var(--gold);
+    color: var(--black);
+    border-radius: 50%;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+  }
+  .step h3 { font-size: 1rem; margin-bottom: 6px; color: var(--text); }
+  .step p { color: var(--muted); font-size: 0.9rem; }
+
+  /* About / tech stack */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 768px) {
+    .about-grid { grid-template-columns: 2fr 1fr; }
+  }
+  .about-text { color: var(--text); font-size: 0.95rem; }
+  .about-text p { margin-bottom: 12px; }
+  .tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill {
+    display: inline-block;
+    padding: 6px 12px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .pill.gold { background: var(--gold); color: var(--black); border-color: var(--gold); font-weight: 600; }
+  .repo-link {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 10px 18px;
+    background: var(--black);
+    color: var(--gold);
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background 0.15s ease;
+  }
+  .repo-link:hover { background: #2a2a2a; }
+
+  /* Footer */
   footer {
     background: #1a1a1a;
     color: #ccc;
-    padding: 30px 20px;
+    padding: 36px 20px;
     text-align: center;
     font-size: 0.85rem;
     line-height: 1.7;
   }
   footer a { color: var(--gold); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  footer .links { margin-top: 10px; display: flex; justify-content: center; gap: 18px; flex-wrap: wrap; }
 </style>
 </head>
 <body>
@@ -111,58 +316,182 @@
 </div>
 
 <header>
-  <h1>Daniels Voice Admissions Agent</h1>
-  <p>An AI-powered conversation assistant exploring graduate program options at Purdue's Mitch Daniels School of Business. Built for the ETB course project.</p>
+  <h1>Daniels Admissions Agent</h1>
+  <p class="tagline">An AI-powered conversation assistant exploring graduate program options at Purdue's Mitch Daniels School of Business. Ask anything about programs, admissions, or careers.</p>
+  <div class="modes">
+    <span>💬 Text chat</span>
+    <span>🎙️ Voice mode</span>
+    <span>📄 Resume aware</span>
+  </div>
 </header>
 
 <main>
 
-  <section>
-    <h2>Talk to the Agent</h2>
+  <section id="agent">
+    <h2>Talk to the Agent <span class="small">— text or voice, your choice</span></h2>
     <div class="agent-box">
       <!-- VOICEFLOW_EMBED_HERE -->
-      <!-- Replace the placeholder below with the Voiceflow embed snippet from Session 3. -->
-      <p class="agent-placeholder">Voice agent loading soon. Check back when the demo is published.</p>
+      <!-- Replace the placeholder below with the Voiceflow embed snippet from Phase G. -->
+      <p class="agent-placeholder">
+        <strong>Voice agent loading soon</strong>
+        Check back when the demo is published.<br>
+        The widget will support both typed messages and spoken voice (microphone icon).
+      </p>
     </div>
   </section>
 
-  <section>
-    <h2>Try Asking</h2>
+  <section id="prompts">
+    <h2>Quick Start <span class="small">— click any prompt to begin</span></h2>
     <div class="prompts">
-      <div class="prompt-card">
-        <strong>Career Pivot</strong>
+      <button class="prompt-card" onclick="sendPrompt('I have 3 years of work experience in fintech and now I want to move into financial management. What programs should I look for?')">
+        <span class="label">Career Pivot</span>
         I have 3 years in fintech and want to move into financial management. What programs should I look at?
-      </div>
-      <div class="prompt-card">
-        <strong>Admissions</strong>
+      </button>
+      <button class="prompt-card" onclick="sendPrompt('Does the MBA program waive the GMAT requirements?')">
+        <span class="label">Admissions</span>
         Does the MBA program waive the GMAT requirement?
-      </div>
-      <div class="prompt-card">
-        <strong>Open-Ended</strong>
+      </button>
+      <button class="prompt-card" onclick="sendPrompt(&quot;I'm thinking about going back to school.&quot;)">
+        <span class="label">Open-Ended</span>
         I'm thinking about going back to school.
-      </div>
-      <div class="prompt-card">
-        <strong>Supply Chain</strong>
+      </button>
+      <button class="prompt-card" onclick="sendPrompt(&quot;I've been working in supply chain for 2 years and want something more strategic.&quot;)">
+        <span class="label">Supply Chain</span>
         I've been working in supply chain for 2 years and want something more strategic.
+      </button>
+    </div>
+  </section>
+
+  <section id="resume">
+    <h2>Skip the Q&amp;A <span class="small">— paste your resume for instant context</span></h2>
+    <details class="resume-section">
+      <summary>📄 Upload your resume context</summary>
+      <div class="resume-body">
+        <p>
+          Don't feel like answering questions? Paste your resume below and the agent will use it as context — pulling out your background, experience, and goals automatically. No file required, just copy from your LinkedIn or resume document.
+        </p>
+        <textarea id="resume-input" placeholder="Paste your resume text here…"></textarea>
+        <button id="send-resume" onclick="sendResume()">Send to Agent</button>
+        <div id="resume-toast" class="toast"></div>
+      </div>
+    </details>
+  </section>
+
+  <section id="how">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="num">1</span>
+        <h3>You start the conversation</h3>
+        <p>Type or speak. Tell the agent about yourself — career goals, experience, or just say "I'm thinking about school."</p>
+      </div>
+      <div class="step">
+        <span class="num">2</span>
+        <h3>RAG retrieves the right info</h3>
+        <p>The agent searches a 77-chunk knowledge base covering 13 graduate programs, 5 personas, and 24 career goals.</p>
+      </div>
+      <div class="step">
+        <span class="num">3</span>
+        <h3>Grounded, source-backed answers</h3>
+        <p>Claude Haiku 4.5 synthesizes a response using only retrieved context — no fabrication, no hallucinated programs.</p>
       </div>
     </div>
   </section>
 
-  <section>
-    <h2>About This Project</h2>
-    <p>
-      This agent was built as part of the ETB (Entrepreneurial Thinking and Behavior) course at Purdue's Daniels School of Business.
-      It uses retrieval-augmented generation over a 77-chunk knowledge base covering 13 graduate programs, 5 applicant personas, and 24 career goals.
-      The voice interface runs on Voiceflow with parallel observability instrumented through LangSmith.
-    </p>
+  <section id="about">
+    <h2>About the Project</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>This agent was built as the final project for <strong>MGMT 59000-ETB (Spring 2026)</strong> — Entrepreneurial Thinking and Behavior at Purdue's Mitch Daniels School of Business.</p>
+        <p>It uses retrieval-augmented generation over publicly available program information. The user-facing agent runs on Voiceflow; a parallel Python pipeline instrumented with LangSmith provides full observability and traceability.</p>
+        <p>All code, knowledge base chunks, system prompts, and trace evidence are open-source on GitHub.</p>
+        <a class="repo-link" href="https://github.com/meownager/etb-daniels-admissions-agent" target="_blank" rel="noopener">View source on GitHub →</a>
+      </div>
+      <div>
+        <div class="tech-stack">
+          <span class="pill gold">Voiceflow</span>
+          <span class="pill gold">LangChain</span>
+          <span class="pill gold">LangSmith</span>
+          <span class="pill">Anthropic Claude</span>
+          <span class="pill">ChromaDB</span>
+          <span class="pill">sentence-transformers</span>
+          <span class="pill">GitHub Pages</span>
+        </div>
+      </div>
+    </div>
   </section>
 
 </main>
 
 <footer>
   <p><strong>Disclaimer:</strong> This is an independent student research project. It is not affiliated with, endorsed by, or operated by Purdue University, the Mitch Daniels School of Business, or its admissions office.</p>
-  <p style="margin-top: 8px;">Data sources: publicly available program information from the Mitch Daniels School of Business website and admissions materials. Built April 2026.</p>
+  <p style="margin-top: 8px;">Data sources: publicly available program information from the Mitch Daniels School of Business website and admissions materials.</p>
+  <div class="links">
+    <a href="https://github.com/meownager/etb-daniels-admissions-agent" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/syeda-mon/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/meownager/etb-daniels-admissions-agent/blob/main/AUTHORS.md" target="_blank" rel="noopener">Authors</a>
+  </div>
+  <p style="margin-top: 14px; opacity: 0.7;">Built April 2026 by Syeda Monowara &amp; Aritrika Roy.</p>
 </footer>
+
+<script>
+  // Helper: open the Voiceflow chat widget and send a message as user input.
+  // Works with the standard Voiceflow web chat widget once it's loaded via the embed snippet.
+  function sendToVoiceflow(text) {
+    if (window.voiceflow && window.voiceflow.chat) {
+      try {
+        window.voiceflow.chat.open();
+        // Send the text as if the user typed it
+        window.voiceflow.chat.interact({ type: 'text', payload: text });
+        return true;
+      } catch (e) {
+        console.error('Voiceflow interaction failed:', e);
+        return false;
+      }
+    }
+    return false;
+  }
+
+  // Triggered by Quick Start prompt cards
+  function sendPrompt(text) {
+    const ok = sendToVoiceflow(text);
+    if (!ok) {
+      alert('The chat widget isn\'t loaded yet. Please wait a moment and try again, or use the chat directly.');
+    }
+  }
+
+  // Triggered by Resume "Send to Agent" button
+  function sendResume() {
+    const input = document.getElementById('resume-input');
+    const toast = document.getElementById('resume-toast');
+    const button = document.getElementById('send-resume');
+    const text = input.value.trim();
+
+    if (!text) {
+      toast.className = 'toast error';
+      toast.textContent = 'Please paste your resume text first.';
+      return;
+    }
+    if (text.length < 50) {
+      toast.className = 'toast error';
+      toast.textContent = 'That looks too short to be a resume. Paste a bit more context.';
+      return;
+    }
+
+    const message = "Here is my background — please use this as context for our conversation:\n\n" + text;
+    const ok = sendToVoiceflow(message);
+
+    if (ok) {
+      toast.className = 'toast success';
+      toast.textContent = '✓ Resume sent to the agent. Check the chat widget.';
+      button.disabled = true;
+      button.textContent = 'Sent';
+    } else {
+      toast.className = 'toast error';
+      toast.textContent = 'The chat widget isn\'t loaded yet. Please wait a moment and try again.';
+    }
+  }
+</script>
 
 </body>
 </html>
