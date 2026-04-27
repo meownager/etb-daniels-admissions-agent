@@ -1,9 +1,23 @@
 # Daniels Admissions Agent
 
-An AI-powered admissions advisor for Purdue's Mitch Daniels School of Business graduate programs. Built as a final project for the ETB course (MGMT 59000-ETB, Spring 2026).
+![Status](https://img.shields.io/badge/status-ETB%20Spring%202026-2bbc8a)
+![Python](https://img.shields.io/badge/python-3.11+-blue)
+![LLM](https://img.shields.io/badge/LLM-Anthropic_Claude_Haiku_4.5-orange)
+![Built with](https://img.shields.io/badge/built%20with-LangChain-1c3c5e)
+![Observability](https://img.shields.io/badge/observability-LangSmith-purple)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+An AI-powered admissions advisor for Purdue's Mitch Daniels School of Business graduate programs. Built as a final project for **MGMT 59000-ETB (Spring 2026)**.
 
 > 🌐 **Live demo:** https://meownager.github.io/etb-daniels-admissions-agent/
-> 📊 **LangSmith traces:** see [`Tracing_LangSmith/`](./Tracing_LangSmith/)
+> 📊 **LangSmith trace evidence:** see [`Tracing_LangSmith/`](./Tracing_LangSmith/)
+> 📅 **Completed:** April 2026
+
+---
+
+## Author
+
+**Syeda Monowara** — [LinkedIn](https://www.linkedin.com/in/syeda-mon/) · [GitHub @meownager](https://github.com/meownager) · smonowar@purdue.edu
 
 ---
 
@@ -50,13 +64,13 @@ Two parallel implementations sharing one knowledge base:
 
 | Layer | Tool |
 |-------|------|
-| Voice + chat front end | Voiceflow |
-| LLM | Anthropic Claude Haiku 4.5 |
-| RAG orchestration | LangChain |
-| Vector store | ChromaDB (local, file-based) |
-| Embeddings | sentence-transformers `all-MiniLM-L6-v2` (free, local) |
-| Observability | LangSmith |
-| Webpage hosting | GitHub Pages |
+| Voice + chat front end | [Voiceflow](https://voiceflow.com/) |
+| LLM | [Anthropic Claude Haiku 4.5](https://www.anthropic.com/) |
+| RAG orchestration | [LangChain](https://langchain.com/) |
+| Vector store | [ChromaDB](https://www.trychroma.com/) (local, file-based) |
+| Embeddings | [sentence-transformers](https://www.sbert.net/) `all-MiniLM-L6-v2` (free, local) |
+| Observability | [LangSmith](https://smith.langchain.com/) |
+| Webpage hosting | [GitHub Pages](https://pages.github.com/) |
 
 ---
 
@@ -97,6 +111,9 @@ python run_scenarios.py  # run 4 test scenarios; traces appear in LangSmith
 ```
 etb-daniels-admissions-agent/
 ├── README.md                       # This file
+├── AUTHORS.md                      # Contributors
+├── CITATION.cff                    # Citation metadata
+├── LICENSE                         # MIT
 ├── index.html                      # Live webpage (GitHub Pages)
 ├── system_prompt.txt               # 7-layer agent system prompt
 ├── kb/                             # 77 knowledge-base chunks
@@ -109,6 +126,7 @@ etb-daniels-admissions-agent/
 │   ├── agent.py
 │   └── run_scenarios.py
 ├── Tracing_LangSmith/              # LangSmith trace screenshots + JSON exports
+│   └── README.md                   # Visual evidence walkthrough
 └── docs/                           # Project documentation
     ├── changelog.md
     └── test_report.md
@@ -118,14 +136,25 @@ etb-daniels-admissions-agent/
 
 ## Acknowledgments
 
-- Built for **MGMT 59000-ETB (Spring 2026)** at Purdue's Mitch Daniels School of Business
-- Course instruction: [Add instructor name]
-- Group members: [Add teammates]
-- Tools: [Anthropic Claude](https://www.anthropic.com/), [LangSmith](https://smith.langchain.com/), [Voiceflow](https://voiceflow.com/), [LangChain](https://langchain.com/)
-- Inspired by [add references here — articles, talks, posts, or builds you drew on]
+- **Course & instructor:** MGMT 59000-ETB (Spring 2026), Purdue Mitch Daniels School of Business — taught by **Rohit Aggarwal**
+- **Contributors:** Syeda Monowara, Aritrika Roy
+- **Tools & frameworks:** [Anthropic Claude](https://www.anthropic.com/), [LangChain](https://langchain.com/), [LangSmith](https://smith.langchain.com/), [Voiceflow](https://voiceflow.com/), [ChromaDB](https://www.trychroma.com/), [sentence-transformers](https://www.sbert.net/)
+- **Open-source resources drawn on:**
+  - [LangChain documentation](https://python.langchain.com/) — RAG patterns, retrieval-augmented chain composition
+  - [LangSmith documentation](https://docs.smith.langchain.com/) — observability instrumentation
+  - [Voiceflow documentation](https://docs.voiceflow.com/) — Playbook configuration and Knowledge Base ingestion
+  - [Anthropic Cookbook](https://github.com/anthropics/anthropic-cookbook) — prompt engineering patterns
+  - [ChromaDB documentation](https://docs.trychroma.com/) — local vector store setup
+  - [sentence-transformers documentation](https://www.sbert.net/) — embedding model selection
 
 ---
 
 ## Disclaimer
 
 This is an independent student research project. It is not affiliated with, endorsed by, or operated by Purdue University, the Mitch Daniels School of Business, or its admissions office. Knowledge base content is sourced from publicly available program information.
+
+---
+
+## License
+
+MIT — see [`LICENSE`](./LICENSE).
