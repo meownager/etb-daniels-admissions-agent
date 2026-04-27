@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "I've been working in the supply chain industry for 2 years now and I want to do something more strategic, but I'm not yet sure where to start."
+  },
+  "outputs": {
+    "output": "That's a great position to be in — two years gives you real context for what you want to build on. Let me help you figure out the right next step.\n\nBefore we go further, what's your name?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "fd0d74c-dirty",
+    "scenario_id": "HP2",
+    "scenario_name": "Supply chain professional"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "cfd16cd4-d253-412d-a12b-baa1cd508ade"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "cab15419-8e00-456c-946b-65f827911960"
+    },
+    "tracing_project": {
+      "id": "b16b4d52-361f-4345-85cc-74263201f248",
+      "name": "etb-daniels-admissions"
+    }
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "I have 3 years of work experience in fintech and now I want to move into financial management as it is in high demand. What programs should I look for?"
+  },
+  "outputs": {
+    "output": "That's a smart move — fintech experience combined with financial management expertise is a strong combination. Based on what you've described, the **MS Finance (MSF)** is the best fit for you.\n\nHere's why: you already have the technology and product side of fintech down. What you're adding now is the financial depth — modeling, analysis, corporate finance fundamentals — that financial management roles require. The MSF is built exactly for that: it's a 10-month, technically rigorous program that takes people with strong analytical backgrounds and gives them the finance expertise employers in those roles are looking for.\n\nGraduates from the MSF typically move into analyst and associate roles at companies like Goldman Sachs, JPMorgan, and other financial institutions — but also into financial management roles at fintech companies themselves, which is increasingly common as those companies mature and need stronger finance functions.\n\nBefore we go further, what's your name? I want to make sure I'm pointing you toward the right details."
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "fd0d74c-dirty",
+    "scenario_id": "HP1",
+    "scenario_name": "Fintech to financial management"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "cfd16cd4-d253-412d-a12b-baa1cd508ade"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "cab15419-8e00-456c-946b-65f827911960"
+    },
+    "tracing_project": {
+      "id": "b16b4d52-361f-4345-85cc-74263201f248",
+      "name": "etb-daniels-admissions"
+    }
+  }
+}

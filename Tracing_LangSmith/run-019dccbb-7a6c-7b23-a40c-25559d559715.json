@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "I'm thinking about going back to school."
+  },
+  "outputs": {
+    "output": "Hi there — I'm here to help you figure out which Purdue business program fits your goals, or just answer any questions you have.\n\nIt sounds like you're exploring the idea. Happy to help. Are you thinking about a graduate program, or are you exploring undergraduate options?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "fd0d74c-dirty",
+    "scenario_id": "FC2",
+    "scenario_name": "Vague opener"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "cfd16cd4-d253-412d-a12b-baa1cd508ade"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "cab15419-8e00-456c-946b-65f827911960"
+    },
+    "tracing_project": {
+      "id": "b16b4d52-361f-4345-85cc-74263201f248",
+      "name": "etb-daniels-admissions"
+    }
+  }
+}
