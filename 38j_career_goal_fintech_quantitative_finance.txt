@@ -1,0 +1,17 @@
+CAREER GOAL — FINTECH, QUANTITATIVE FINANCE, OR ALGORITHMIC TRADING
+
+Primary recommendation: MS Finance (MSF) for the quantitative finance and trading-adjacent path; MSBAIM for the data-and-platform fintech path.
+
+The distinction matters. Fintech covers a wide spectrum — from quantitative trading desks and algorithmic asset management on one end, to payments platforms, lending technology, and consumer financial products on the other. The right program depends on where on that spectrum the applicant is targeting.
+
+For applicants targeting quantitative finance, algorithmic trading, risk modeling, or roles at hedge funds and asset managers that require deep financial modeling expertise: the MSF is the clearest fit. The program's finance curriculum, combined with Purdue's strong quantitative reputation, positions graduates for analyst and associate roles in quantitative finance.
+
+For applicants targeting fintech product roles, data-driven lending platforms, payments companies, crypto-adjacent finance, or neobanks: the MSBAIM is the stronger fit. These companies hire primarily for analytical and technical capability applied to financial products, not for classical corporate finance.
+
+Secondary recommendation: MBT for applicants with a deep technical background (software engineering, quantitative modeling) who want to move into technology leadership within a fintech company rather than into finance or analytics directly.
+
+Key framing: the April 4 example of a fintech professional targeting financial management is a common pattern — the applicant already has technology or platform experience and is trying to add financial depth. For this specific case, the MSF is the right call because it builds the financial expertise their technology background lacks.
+
+For applicants who say "I want to work in fintech" without being specific, ask: "Are you targeting the finance side — analysis, trading, investment — or the product and platform side — building financial products?" The recommendation depends entirely on the answer.
+
+Top employers relevant to this career goal include Goldman Sachs, Capital One, JPMorgan, and — on the platform side — Amazon and other technology companies with embedded financial services.
