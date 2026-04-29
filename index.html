@@ -6,7 +6,7 @@
 <title>Daniels Admissions Agent — ETB Student Project</title>
 <meta name="description" content="AI-powered admissions advisor for Purdue's Mitch Daniels School of Business graduate programs. Built for the ETB course." />
 <!-- PDF.js — for parsing resume PDFs in the browser -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <style>
   :root {
     --gold: #CEB888;
@@ -574,7 +574,7 @@
         <div class="resume-actions">
           <input type="file" id="pdf-upload" accept=".pdf,application/pdf" style="display:none" />
           <button id="upload-pdf-btn" onclick="document.getElementById('pdf-upload').click()">📎 Upload PDF</button>
-          <span class="or-divider">or paste text below</span>
+          <span class="or-divider">PDF files only — or paste text below</span>
         </div>
         <textarea id="resume-input" placeholder="Paste your resume text here…"></textarea>
         <button id="send-resume" onclick="sendResume()">Send to Agent</button>
@@ -881,7 +881,7 @@
     }
     // Configure the PDF.js worker (required for parsing)
     pdfjsLib.GlobalWorkerOptions.workerSrc =
-      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.js';
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
     const fileInput = document.getElementById('pdf-upload');
     const uploadBtn = document.getElementById('upload-pdf-btn');
