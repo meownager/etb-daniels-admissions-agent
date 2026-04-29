@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "What do MSBAIM graduates typically earn?"
+  },
+  "outputs": {
+    "output": "Based on the most recent data, MSBAIM graduates have the strongest salary outcomes of any specialized master's program at Daniels. The average full-time starting salary is approximately **$104,779**. The highest reported salary in the most recent cycle was $160,000.\n\nTo put that in perspective: the total tuition for the one-year program is around $56,700, which means graduates typically recover the full cost of tuition in less than seven months of gross earnings. That's a pretty strong financial return.\n\nThat said, individual results vary based on your background, the specific role you land, and the company. But the data shows this program opens doors to well-compensated positions pretty quickly.\n\nAre you thinking about the MSBAIM, or are you exploring other options?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions-aritrika",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "c9ff57d-dirty",
+    "scenario_id": "FACT1",
+    "scenario_name": "MSBAIM salary query"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "ee511ff2-0cf6-46da-94b9-d9f4e4b7b8d8"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "ae9c41b7-de84-4833-b657-e1c01c3cd34e"
+    },
+    "tracing_project": {
+      "id": "bc965754-3dcc-4995-bc0b-fa74410962e0",
+      "name": "etb-daniels-admissions-aritrika"
+    }
+  }
+}

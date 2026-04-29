@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "I just graduated with a computer science degree and want to work in product analytics at a tech company. I am an international student. I am not sure what program suits me."
+  },
+  "outputs": {
+    "output": "Hi there — I'm here to help you figure out which Purdue business program fits your goals. It sounds like you have a clear direction, so let me ask a few quick questions to point you toward the right fit.\n\nFirst, what's your name?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions-aritrika",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "c9ff57d-dirty",
+    "scenario_id": "HP3",
+    "scenario_name": "International student product analytics"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "ee511ff2-0cf6-46da-94b9-d9f4e4b7b8d8"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "ae9c41b7-de84-4833-b657-e1c01c3cd34e"
+    },
+    "tracing_project": {
+      "id": "bc965754-3dcc-4995-bc0b-fa74410962e0",
+      "name": "etb-daniels-admissions-aritrika"
+    }
+  }
+}

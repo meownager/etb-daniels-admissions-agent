@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "This seems really expensive. Is it worth the investment?"
+  },
+  "outputs": {
+    "output": "I hear you — that's the right question to ask before committing to any program. Let me give you some concrete context.\n\nFirst, Purdue's pricing is actually significantly lower than peer schools. Most of our one-year master's programs run $55,000 to $70,000 in tuition, while comparable programs at private universities often cost $90,000 to $130,000 or more. That's a real difference.\n\nBut the bigger picture is payback. Here's what that looks like in practice:\n\n**If you're looking at the MSBAIM**, graduates typically start around $105,000. The full tuition is roughly $57,000. That means you recover the entire cost in less than seven months of working — before you've even finished your first year on the job.\n\n**For the One-Year MBA**, a typical professional moves from something like $75,000 into a business or consulting role at $95,000 to $115,000 — a $20,000 to $40,000 annual increase. At that rate, the program pays back in two to three years. And you're only out of the workforce for 11 months, not two years.\n\n**If cost is the main constraint right now**, the Online MBA is worth considering — it's around $35,000 total, and you keep your full income the entire time you're studying.\n\nBefore I go further, though — I want to understand what you're actually looking at. Are you exploring a specific program, or are you still figuring out which direction makes sense for your situation?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions-aritrika",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "c9ff57d-dirty",
+    "scenario_id": "OBJ1",
+    "scenario_name": "Cost objection"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "ee511ff2-0cf6-46da-94b9-d9f4e4b7b8d8"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "ae9c41b7-de84-4833-b657-e1c01c3cd34e"
+    },
+    "tracing_project": {
+      "id": "bc965754-3dcc-4995-bc0b-fa74410962e0",
+      "name": "etb-daniels-admissions-aritrika"
+    }
+  }
+}

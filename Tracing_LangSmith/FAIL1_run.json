@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "I have 9 years in software as a technical program manager at a data analytics company and want to move into product management at a big tech company."
+  },
+  "outputs": {
+    "output": "That's a strong position to build from. You've got the technical credibility and the program management experience — what you're looking to add is the business strategy and product leadership layer that gets you into a PM role at scale.\n\nBefore I point you toward the right program, let me ask: are you planning to leave your current role to do this, or would you need to study while staying employed?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions-aritrika",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "c9ff57d-dirty",
+    "scenario_id": "FAIL1",
+    "scenario_name": "TPM wrong routing"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "ee511ff2-0cf6-46da-94b9-d9f4e4b7b8d8"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "ae9c41b7-de84-4833-b657-e1c01c3cd34e"
+    },
+    "tracing_project": {
+      "id": "bc965754-3dcc-4995-bc0b-fa74410962e0",
+      "name": "etb-daniels-admissions-aritrika"
+    }
+  }
+}
