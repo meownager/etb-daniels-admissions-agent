@@ -91,14 +91,18 @@
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 32px;
-    text-align: center;
-    min-height: 240px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    padding: 8px;
     box-shadow: var(--shadow-lg);
+    overflow: hidden;
+  }
+  #voiceflow-chat {
+    width: 100%;
+    min-height: 560px;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  #voiceflow-chat > * {
+    border-radius: 8px !important;
   }
   .agent-placeholder {
     color: var(--muted);
@@ -330,7 +334,8 @@
   <section id="agent">
     <h2>Talk to the Agent <span class="small">— text or voice, your choice</span></h2>
     <div class="agent-box">
-      <!-- Voiceflow chat widget -->
+      <!-- Voiceflow chat widget — embedded inline -->
+      <div id="voiceflow-chat"></div>
       <script type="text/javascript">
         (function(d, t) {
             var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
@@ -341,13 +346,17 @@
                 versionID: 'production',
                 voice: {
                   url: "https://runtime-api.voiceflow.com"
-                }
+                },
+                render: {
+                  mode: 'embedded',
+                  target: document.getElementById('voiceflow-chat')
+                },
+                autostart: true
               });
             }
             v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
         })(document, 'script');
       </script>
-      <p style="color: #555; font-style: italic; font-size: 0.9rem;">Click the chat bubble (bottom-right) to start a conversation. Or use a Quick Start prompt below.</p>
     </div>
   </section>
 
