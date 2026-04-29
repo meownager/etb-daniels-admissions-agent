@@ -835,7 +835,7 @@
     document.getElementById('agent').scrollIntoView({ behavior: 'smooth' });
   }
 
-  function sendResume() {
+  async function sendResume() {
     const input = document.getElementById('resume-input');
     const toast = document.getElementById('resume-toast');
     const button = document.getElementById('send-resume');
@@ -850,13 +850,29 @@
       toast.textContent = 'That looks too short to be a resume. Paste a bit more context.';
       return;
     }
-    const message = "Here is my background — please use this as context for our conversation:\n\n" + text;
-    handleUserMessage(message);
+
+    // Truncate if too long — Voiceflow API has payload limits
+    const MAX_RESUME_CHARS = 3000;
+    let resumeText = text;
+    if (resumeText.length > MAX_RESUME_CHARS) {
+      resumeText = resumeText.substring(0, MAX_RESUME_CHARS) + ' [truncated]';
+    }
+
+    // Render a SHORT placeholder bubble — NOT the full resume text
+    addMessage('📎 Resume uploaded — using as context for this conversation', 'user');
+
     toast.className = 'toast success';
-    toast.textContent = '✓ Resume sent to the agent. Check the chat above.';
+    toast.textContent = '✓ Resume sent. The agent will respond based on your background.';
     button.disabled = true;
     button.textContent = 'Sent';
     document.getElementById('agent').scrollIntoView({ behavior: 'smooth' });
+
+    // Send the full resume text silently to Voiceflow as context
+    setTyping(true);
+    const message = "Here is my background — please use this as context for our conversation:\n\n" + resumeText;
+    const traces = await callVoiceflow({ type: 'text', payload: message });
+    setTyping(false);
+    handleResponse(traces);
   }
 
   async function resetConversation() {
