@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Daniels Admissions Agent — ETB Student Project</title>
 <meta name="description" content="AI-powered admissions advisor for Purdue's Mitch Daniels School of Business graduate programs. Built for the ETB course." />
+<!-- PDF.js — for parsing resume PDFs in the browser -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.min.js"></script>
 <style>
   :root {
     --gold: #CEB888;
@@ -373,6 +375,33 @@
   }
   button#send-resume:hover { background: #2a2a2a; }
   button#send-resume:disabled { background: #999; color: #ddd; border-color: #ddd; cursor: not-allowed; }
+  .resume-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+  }
+  button#upload-pdf-btn {
+    padding: 10px 18px;
+    background: var(--gold);
+    color: var(--black);
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: opacity 0.15s;
+  }
+  button#upload-pdf-btn:hover { opacity: 0.85; }
+  button#upload-pdf-btn:disabled { opacity: 0.6; cursor: wait; }
+  .or-divider {
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .toast.info { background: #e3f2fd; color: #0d47a1; border: 1px solid #90caf9; display: block; }
   .toast {
     margin-top: 10px;
     padding: 10px 14px;
@@ -540,8 +569,13 @@
       <summary>📄 Upload your resume context</summary>
       <div class="resume-body">
         <p>
-          Don't feel like answering questions? Paste your resume below and the agent will use it as context — pulling out your background, experience, and goals automatically.
+          Don't feel like answering questions? <strong>Upload a PDF resume</strong> or paste resume text below — the agent will use it as context for the rest of the conversation.
         </p>
+        <div class="resume-actions">
+          <input type="file" id="pdf-upload" accept=".pdf,application/pdf" style="display:none" />
+          <button id="upload-pdf-btn" onclick="document.getElementById('pdf-upload').click()">📎 Upload PDF</button>
+          <span class="or-divider">or paste text below</span>
+        </div>
         <textarea id="resume-input" placeholder="Paste your resume text here…"></textarea>
         <button id="send-resume" onclick="sendResume()">Send to Agent</button>
         <div id="resume-toast" class="toast"></div>
@@ -833,6 +867,69 @@
   }
 
   // ============================================================
+  // PDF resume upload (browser-side parsing via PDF.js)
+  // ============================================================
+  function setupPdfUpload() {
+    if (typeof pdfjsLib === 'undefined') {
+      console.warn('PDF.js not loaded — PDF upload will be unavailable');
+      const btn = document.getElementById('upload-pdf-btn');
+      if (btn) {
+        btn.disabled = true;
+        btn.title = 'PDF upload unavailable — paste text instead';
+      }
+      return;
+    }
+    // Configure the PDF.js worker (required for parsing)
+    pdfjsLib.GlobalWorkerOptions.workerSrc =
+      'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.0.379/pdf.worker.min.js';
+
+    const fileInput = document.getElementById('pdf-upload');
+    const uploadBtn = document.getElementById('upload-pdf-btn');
+    const textarea = document.getElementById('resume-input');
+    const toast = document.getElementById('resume-toast');
+
+    fileInput.addEventListener('change', async function(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      if (file.size > 10 * 1024 * 1024) {
+        toast.className = 'toast error';
+        toast.textContent = 'PDF too large (max 10MB). Try a smaller file.';
+        return;
+      }
+
+      uploadBtn.disabled = true;
+      uploadBtn.textContent = '⏳ Reading PDF…';
+      toast.className = 'toast info';
+      toast.textContent = 'Extracting text from PDF…';
+
+      try {
+        const arrayBuffer = await file.arrayBuffer();
+        const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+        let fullText = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const content = await page.getTextContent();
+          const pageText = content.items.map(function(item) { return item.str; }).join(' ');
+          fullText += pageText + '\n\n';
+        }
+        const cleaned = fullText.trim().replace(/\s+/g, ' ').replace(/\n{3,}/g, '\n\n');
+        textarea.value = cleaned;
+        toast.className = 'toast success';
+        toast.textContent = '✓ PDF extracted (' + cleaned.length + ' chars). Review the text below, then click "Send to Agent".';
+      } catch (err) {
+        console.error('PDF parsing error:', err);
+        toast.className = 'toast error';
+        toast.textContent = 'Could not read PDF: ' + (err.message || 'unknown error') + '. Try copy-pasting the text instead.';
+      } finally {
+        uploadBtn.disabled = false;
+        uploadBtn.textContent = '📎 Upload PDF';
+        fileInput.value = '';
+      }
+    });
+  }
+
+  // ============================================================
   // Initialize on load
   // ============================================================
   window.addEventListener('DOMContentLoaded', async function() {
@@ -843,6 +940,9 @@
         handleUserMessage(input.value);
       }
     });
+
+    // Wire up PDF upload
+    setupPdfUpload();
 
     // Send launch action to start the conversation
     setTyping(true);
