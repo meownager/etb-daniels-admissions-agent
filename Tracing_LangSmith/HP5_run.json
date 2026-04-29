@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "I just graduated in accounting and want to work at a Big 4 firm like Deloitte or EY."
+  },
+  "outputs": {
+    "output": "Hi there — congratulations on graduating. That's a clear goal, and I can help you think through the right next step.\n\nBefore I point you toward a program, let me ask: are you planning to sit for the CPA exam, or is that not part of your plan right now?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions-aritrika",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "c9ff57d-dirty",
+    "scenario_id": "HP5",
+    "scenario_name": "Accounting to Big 4"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "ee511ff2-0cf6-46da-94b9-d9f4e4b7b8d8"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "ae9c41b7-de84-4833-b657-e1c01c3cd34e"
+    },
+    "tracing_project": {
+      "id": "bc965754-3dcc-4995-bc0b-fa74410962e0",
+      "name": "etb-daniels-admissions-aritrika"
+    }
+  }
+}

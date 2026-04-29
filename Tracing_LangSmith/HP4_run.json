@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "I have seven years of experience in supply chain at a manufacturing firm. I want to move to a strategic management role but cannot leave my job or relocate."
+  },
+  "outputs": {
+    "output": "That's a really clear picture — seven years of supply chain depth is a strong foundation, and I understand the constraint about staying employed and in place.\n\nGiven where you are, let me ask one clarifying question: when you say strategic management role, are you picturing that within supply chain — like moving into a director or VP-level supply chain leadership position at your company or another firm? Or are you thinking about using your supply chain background as a platform to move into broader P&L or general business leadership?\n\nThe answer shapes which program makes the most sense for you."
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions-aritrika",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "c9ff57d-dirty",
+    "scenario_id": "HP4",
+    "scenario_name": "Supply chain cannot relocate"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "ee511ff2-0cf6-46da-94b9-d9f4e4b7b8d8"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "ae9c41b7-de84-4833-b657-e1c01c3cd34e"
+    },
+    "tracing_project": {
+      "id": "bc965754-3dcc-4995-bc0b-fa74410962e0",
+      "name": "etb-daniels-admissions-aritrika"
+    }
+  }
+}

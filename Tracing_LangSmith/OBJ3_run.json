@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "I am worried about the GMAT. I am not a strong test taker."
+  },
+  "outputs": {
+    "output": "I hear you — that's a concern a lot of people bring up, and the good news is that for most of our programs, the GMAT may not even be required.\n\nHere's how it works: if your undergraduate GPA was 3.0 or above, you can skip the GMAT entirely for programs like MS Accounting and MS Business Analytics. For MS Finance, if you also have a STEM degree, the test is waived. For our MBA and MBT programs, there's a waiver process where the admissions committee looks at your full profile — your background, experience, recommendations, and goals — not just a test score.\n\nSo before we worry about the test itself, let me ask: have you already graduated, and do you remember roughly what your GPA was?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions-aritrika",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "c9ff57d-dirty",
+    "scenario_id": "OBJ3",
+    "scenario_name": "GMAT worry"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "ee511ff2-0cf6-46da-94b9-d9f4e4b7b8d8"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "ae9c41b7-de84-4833-b657-e1c01c3cd34e"
+    },
+    "tracing_project": {
+      "id": "bc965754-3dcc-4995-bc0b-fa74410962e0",
+      "name": "etb-daniels-admissions-aritrika"
+    }
+  }
+}

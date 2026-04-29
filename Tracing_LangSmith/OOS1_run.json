@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "What is the student housing situation like near campus?"
+  },
+  "outputs": {
+    "output": "That's a practical question, but it's actually outside what I can help with — housing, dining, and campus facilities are managed separately from admissions, and I don't have current information on availability or options.\n\nFor details on student housing near campus, I'd direct you to the Purdue Office of the Registrar or the main Purdue University website at purdue.edu — they'll have the most up-to-date information on residential options for graduate students.\n\nIs there anything about the academic programs themselves, career outcomes, or the application process that I can help you with?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions-aritrika",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "c9ff57d-dirty",
+    "scenario_id": "OOS1",
+    "scenario_name": "Out of scope redirect"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "ee511ff2-0cf6-46da-94b9-d9f4e4b7b8d8"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "ae9c41b7-de84-4833-b657-e1c01c3cd34e"
+    },
+    "tracing_project": {
+      "id": "bc965754-3dcc-4995-bc0b-fa74410962e0",
+      "name": "etb-daniels-admissions-aritrika"
+    }
+  }
+}

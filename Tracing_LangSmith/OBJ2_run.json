@@ -1,0 +1,31 @@
+{
+  "inputs": {
+    "input": "I already have 8 years of experience. Do I really need a degree?"
+  },
+  "outputs": {
+    "output": "I hear you — and that's a fair question when you've already built real expertise. Here's the honest take:\n\nYour experience is genuinely valuable. But experience and a degree do two different things. Experience teaches you how to operate in the environment you're already in. A degree makes your experience legible to people and companies that don't know you yet.\n\nIf you're trying to get promoted within your current company, your track record probably speaks for itself. But if you're trying to move into a new company, switch industries, or step into a leadership role at a level above where you've been, a lot of employers use the graduate degree as a filter — not because they doubt what you can do, but because it's an efficient way to sort applications. The degree doesn't replace your 8 years. It amplifies it.\n\nSo let me ask: Have you hit a ceiling you're trying to break through, or is this more of a proactive move? What's prompting you to think about a degree now?"
+  },
+  "metadata": {
+    "LANGSMITH_ENDPOINT": "https://api.smith.langchain.com",
+    "LANGSMITH_PROJECT": "etb-daniels-admissions-aritrika",
+    "LANGSMITH_TRACING": "true",
+    "ls_run_depth": 0,
+    "revision_id": "c9ff57d-dirty",
+    "scenario_id": "OBJ2",
+    "scenario_name": "Experience objection"
+  },
+  "langsmith": {
+    "organization": {
+      "name": "Personal",
+      "id": "ee511ff2-0cf6-46da-94b9-d9f4e4b7b8d8"
+    },
+    "workspace": {
+      "name": "Workspace 1",
+      "id": "ae9c41b7-de84-4833-b657-e1c01c3cd34e"
+    },
+    "tracing_project": {
+      "id": "bc965754-3dcc-4995-bc0b-fa74410962e0",
+      "name": "etb-daniels-admissions-aritrika"
+    }
+  }
+}
