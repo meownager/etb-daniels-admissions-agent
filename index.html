@@ -27,7 +27,6 @@
     line-height: 1.6;
   }
 
-  /* Disclaimer banner */
   .banner {
     background: #fff8e1;
     border-bottom: 1px solid #f0d97a;
@@ -37,7 +36,6 @@
     color: #5a4a00;
   }
 
-  /* Hero */
   header {
     background: linear-gradient(135deg, var(--black) 0%, #1a1a1a 70%, #2a2418 100%);
     color: white;
@@ -86,32 +84,191 @@
     margin-left: 8px;
   }
 
-  /* Agent box (Voiceflow embed area) */
-  .agent-box {
+  /* ========== Custom Chat UI ========== */
+  .chat-container {
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 8px;
     box-shadow: var(--shadow-lg);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 620px;
   }
-  #voiceflow-chat {
-    width: 100%;
-    min-height: 560px;
-    border-radius: 8px;
-    overflow: hidden;
+  .chat-header {
+    background: linear-gradient(135deg, var(--black) 0%, #2a2a2a 100%);
+    color: white;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2px solid var(--gold);
   }
-  #voiceflow-chat > * {
-    border-radius: 8px !important;
+  .agent-avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+    flex-shrink: 0;
   }
-  .agent-placeholder {
-    color: var(--muted);
-    font-style: italic;
+  .agent-info { flex: 1; }
+  .agent-name { font-weight: 600; font-size: 1rem; line-height: 1.2; }
+  .agent-status {
+    font-size: 0.75rem;
+    color: var(--gold-light);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 2px;
+  }
+  .agent-status::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    background: #4caf50;
+    border-radius: 50%;
+  }
+  .chat-header-actions { display: flex; gap: 6px; }
+  .header-btn {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    cursor: pointer;
     font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
   }
-  .agent-placeholder strong { color: var(--text); display: block; margin-bottom: 8px; font-style: normal; }
+  .header-btn:hover { background: rgba(255,255,255,0.18); }
+  .header-btn.active {
+    background: var(--gold);
+    color: var(--black);
+    border-color: var(--gold);
+  }
 
-  /* Quick prompts */
+  .chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    background: #fafafa;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .chat-messages::-webkit-scrollbar { width: 8px; }
+  .chat-messages::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 4px; }
+  .chat-messages::-webkit-scrollbar-thumb:hover { background: #b0b0b0; }
+
+  .message { display: flex; max-width: 85%; }
+  .message.user { align-self: flex-end; justify-content: flex-end; }
+  .message.agent { align-self: flex-start; }
+  .message-bubble {
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+  .message.user .message-bubble {
+    background: var(--gold);
+    color: var(--black);
+    border-bottom-right-radius: 4px;
+  }
+  .message.agent .message-bubble {
+    background: white;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+  }
+
+  .typing-dots {
+    display: inline-flex;
+    gap: 4px;
+    align-items: center;
+    height: 1.2em;
+  }
+  .typing-dots span {
+    width: 7px;
+    height: 7px;
+    background: var(--muted);
+    border-radius: 50%;
+    animation: typing 1.4s infinite;
+  }
+  .typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes typing {
+    0%, 60%, 100% { opacity: 0.3; transform: scale(0.8); }
+    30% { opacity: 1; transform: scale(1); }
+  }
+
+  .chat-input-bar {
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 12px 14px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  #chat-input {
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  #chat-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(206, 184, 136, 0.15);
+  }
+  .icon-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .icon-btn:hover { background: #f5f5f5; color: var(--text); }
+  #mic-button.active {
+    background: #ff5252;
+    color: white;
+    border-color: #ff5252;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.5); }
+    50% { box-shadow: 0 0 0 10px rgba(255, 82, 82, 0); }
+  }
+  #send-button {
+    background: var(--black);
+    color: var(--gold);
+    border-color: var(--black);
+  }
+  #send-button:hover { background: #2a2a2a; }
+  #send-button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  /* ========== Quick prompts ========== */
   .prompts {
     display: grid;
     grid-template-columns: 1fr;
@@ -128,7 +285,7 @@
     padding: 14px 18px;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
     text-align: left;
     width: 100%;
     color: var(--text);
@@ -149,7 +306,7 @@
     font-weight: 600;
   }
 
-  /* Resume upload section */
+  /* ========== Resume section ========== */
   details.resume-section {
     background: var(--card);
     border: 1px solid var(--border);
@@ -213,7 +370,6 @@
     font-weight: 600;
     cursor: pointer;
     font-family: inherit;
-    transition: background 0.15s ease;
   }
   button#send-resume:hover { background: #2a2a2a; }
   button#send-resume:disabled { background: #999; color: #ddd; border-color: #ddd; cursor: not-allowed; }
@@ -227,7 +383,7 @@
   .toast.success { background: #e8f5e9; color: #1b5e20; border: 1px solid #a5d6a7; display: block; }
   .toast.error { background: #ffebee; color: #b71c1c; border: 1px solid #ef9a9a; display: block; }
 
-  /* How it works */
+  /* ========== Steps ========== */
   .steps {
     display: grid;
     grid-template-columns: 1fr;
@@ -259,7 +415,7 @@
   .step h3 { font-size: 1rem; margin-bottom: 6px; color: var(--text); }
   .step p { color: var(--muted); font-size: 0.9rem; }
 
-  /* About / tech stack */
+  /* ========== About / tech stack ========== */
   .about-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -295,11 +451,10 @@
     border-radius: 6px;
     font-size: 0.9rem;
     font-weight: 600;
-    transition: background 0.15s ease;
   }
   .repo-link:hover { background: #2a2a2a; }
 
-  /* Footer */
+  /* ========== Footer ========== */
   footer {
     background: #1a1a1a;
     color: #ccc;
@@ -332,31 +487,28 @@
 <main>
 
   <section id="agent">
-    <h2>Talk to the Agent <span class="small">— text or voice, your choice</span></h2>
-    <div class="agent-box">
-      <!-- Voiceflow chat widget — embedded inline -->
-      <div id="voiceflow-chat"></div>
-      <script type="text/javascript">
-        (function(d, t) {
-            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
-            v.onload = function() {
-              window.voiceflow.chat.load({
-                verify: { projectID: '69ee5ef492c73141d459180c' },
-                url: 'https://general-runtime.voiceflow.com',
-                versionID: 'production',
-                voice: {
-                  url: "https://runtime-api.voiceflow.com"
-                },
-                render: {
-                  mode: 'embedded',
-                  target: document.getElementById('voiceflow-chat')
-                },
-                autostart: true
-              });
-            }
-            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
-        })(document, 'script');
-      </script>
+    <h2>Talk to the Agent <span class="small">— text, voice, or upload your resume</span></h2>
+
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="agent-avatar">D</div>
+        <div class="agent-info">
+          <div class="agent-name">Daniels Admissions Agent</div>
+          <div class="agent-status">Online · Ready to help</div>
+        </div>
+        <div class="chat-header-actions">
+          <button class="header-btn" id="tts-toggle" onclick="toggleTTS()" title="Toggle voice output">🔇</button>
+          <button class="header-btn" id="reset-btn" onclick="resetConversation()" title="Start a new conversation">↺</button>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chat-messages"></div>
+
+      <div class="chat-input-bar">
+        <input type="text" id="chat-input" placeholder="Type your message…" autocomplete="off" />
+        <button class="icon-btn" id="mic-button" onclick="toggleMic()" title="Voice input">🎙️</button>
+        <button class="icon-btn" id="send-button" onclick="handleSendClick()" title="Send">➤</button>
+      </div>
     </div>
   </section>
 
@@ -388,7 +540,7 @@
       <summary>📄 Upload your resume context</summary>
       <div class="resume-body">
         <p>
-          Don't feel like answering questions? Paste your resume below and the agent will use it as context — pulling out your background, experience, and goals automatically. No file required, just copy from your LinkedIn or resume document.
+          Don't feel like answering questions? Paste your resume below and the agent will use it as context — pulling out your background, experience, and goals automatically.
         </p>
         <textarea id="resume-input" placeholder="Paste your resume text here…"></textarea>
         <button id="send-resume" onclick="sendResume()">Send to Agent</button>
@@ -455,38 +607,205 @@
 </footer>
 
 <script>
-  // Helper: open the Voiceflow chat widget and send a message as user input.
-  // Works with the standard Voiceflow web chat widget once it's loaded via the embed snippet.
-  function sendToVoiceflow(text) {
-    if (window.voiceflow && window.voiceflow.chat) {
-      try {
-        window.voiceflow.chat.open();
-        // Send the text as if the user typed it
-        window.voiceflow.chat.interact({ type: 'text', payload: text });
-        return true;
-      } catch (e) {
-        console.error('Voiceflow interaction failed:', e);
-        return false;
+  // ============================================================
+  // Configuration
+  // ============================================================
+  // ⚠️ Replace this placeholder with your real Voiceflow Dialog Manager API key.
+  //    Format: VF.DM.xxxxxxxxxxxxxxxx
+  //    Get it from: Voiceflow → Settings → API Keys
+  const VF_API_KEY = 'VF.DM.69f15c470545c03db88d8d42.kj9eOTabetFYp6vL';
+  const VF_VERSION_ID = 'production';
+
+  // Generate or retrieve a stable user ID for this browser
+  const USER_ID = (function() {
+    let id = localStorage.getItem('vf_user_id');
+    if (!id) {
+      id = 'user_' + Math.random().toString(36).substring(2, 12) + Date.now().toString(36);
+      localStorage.setItem('vf_user_id', id);
+    }
+    return id;
+  })();
+
+  // ============================================================
+  // State
+  // ============================================================
+  let isListening = false;
+  let isTTSEnabled = false;
+  let recognition = null;
+
+  // Initialize Web Speech API for voice input
+  if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+    const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    recognition = new SR();
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognition.lang = 'en-US';
+  }
+
+  // ============================================================
+  // UI helpers
+  // ============================================================
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function addMessage(text, sender) {
+    const container = document.getElementById('chat-messages');
+    const msg = document.createElement('div');
+    msg.className = 'message ' + sender;
+    msg.innerHTML = '<div class="message-bubble">' + escapeHtml(text) + '</div>';
+    container.appendChild(msg);
+    container.scrollTop = container.scrollHeight;
+  }
+
+  function setTyping(show) {
+    let indicator = document.getElementById('typing-indicator');
+    if (show && !indicator) {
+      const container = document.getElementById('chat-messages');
+      indicator = document.createElement('div');
+      indicator.id = 'typing-indicator';
+      indicator.className = 'message agent';
+      indicator.innerHTML = '<div class="message-bubble"><span class="typing-dots"><span></span><span></span><span></span></span></div>';
+      container.appendChild(indicator);
+      container.scrollTop = container.scrollHeight;
+    } else if (!show && indicator) {
+      indicator.remove();
+    }
+  }
+
+  // ============================================================
+  // Voiceflow API
+  // ============================================================
+  async function callVoiceflow(action) {
+    if (VF_API_KEY === 'PASTE_YOUR_VOICEFLOW_API_KEY_HERE') {
+      addMessage('⚠️ Voiceflow API key not configured. Please add your key to the index.html file.', 'agent');
+      return null;
+    }
+    try {
+      const response = await fetch(
+        'https://general-runtime.voiceflow.com/state/user/' + USER_ID + '/interact',
+        {
+          method: 'POST',
+          headers: {
+            'Authorization': VF_API_KEY,
+            'Content-Type': 'application/json',
+            'versionID': VF_VERSION_ID
+          },
+          body: JSON.stringify({ action: action })
+        }
+      );
+      if (!response.ok) {
+        throw new Error('HTTP ' + response.status + ' — ' + (await response.text()));
+      }
+      return await response.json();
+    } catch (err) {
+      console.error('Voiceflow API error:', err);
+      addMessage('Sorry, I had trouble reaching the agent. (' + err.message + ')', 'agent');
+      return null;
+    }
+  }
+
+  function handleResponse(traces) {
+    if (!traces) return;
+    for (const trace of traces) {
+      if (trace.type === 'text' || trace.type === 'speak') {
+        const text = (trace.payload && trace.payload.message) || '';
+        if (text) {
+          addMessage(text, 'agent');
+          if (isTTSEnabled) speak(text);
+        }
       }
     }
-    return false;
   }
 
-  // Triggered by Quick Start prompt cards
-  function sendPrompt(text) {
-    const ok = sendToVoiceflow(text);
-    if (!ok) {
-      alert('The chat widget isn\'t loaded yet. Please wait a moment and try again, or use the chat directly.');
+  async function handleUserMessage(text) {
+    text = (text || '').trim();
+    if (!text) return;
+    addMessage(text, 'user');
+    document.getElementById('chat-input').value = '';
+    setTyping(true);
+    const traces = await callVoiceflow({ type: 'text', payload: text });
+    setTyping(false);
+    handleResponse(traces);
+  }
+
+  // ============================================================
+  // Voice input (Web Speech API — built into Chrome/Safari)
+  // ============================================================
+  function toggleMic() {
+    if (!recognition) {
+      alert('Voice input not supported in this browser. Try Chrome or Safari.');
+      return;
     }
+    if (isListening) {
+      recognition.stop();
+      return;
+    }
+    isListening = true;
+    document.getElementById('mic-button').classList.add('active');
+    try {
+      recognition.start();
+    } catch (e) {
+      console.error('Recognition start failed:', e);
+      isListening = false;
+      document.getElementById('mic-button').classList.remove('active');
+    }
+    recognition.onresult = function(e) {
+      const text = e.results[0][0].transcript;
+      handleUserMessage(text);
+    };
+    recognition.onend = function() {
+      isListening = false;
+      document.getElementById('mic-button').classList.remove('active');
+    };
+    recognition.onerror = function(e) {
+      console.error('Speech recognition error:', e);
+      isListening = false;
+      document.getElementById('mic-button').classList.remove('active');
+    };
   }
 
-  // Triggered by Resume "Send to Agent" button
+  // ============================================================
+  // Voice output (Web Speech Synthesis — built into all browsers)
+  // ============================================================
+  function speak(text) {
+    if (!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    const cleaned = text.replace(/\*\*/g, '').replace(/\*/g, '').replace(/_/g, '');
+    const utterance = new SpeechSynthesisUtterance(cleaned);
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+    speechSynthesis.speak(utterance);
+  }
+
+  function toggleTTS() {
+    isTTSEnabled = !isTTSEnabled;
+    const btn = document.getElementById('tts-toggle');
+    btn.classList.toggle('active', isTTSEnabled);
+    btn.textContent = isTTSEnabled ? '🔊' : '🔇';
+    if (!isTTSEnabled) speechSynthesis.cancel();
+  }
+
+  // ============================================================
+  // Public actions (called from HTML buttons)
+  // ============================================================
+  function handleSendClick() {
+    const input = document.getElementById('chat-input');
+    handleUserMessage(input.value);
+  }
+
+  function sendPrompt(text) {
+    handleUserMessage(text);
+    document.getElementById('agent').scrollIntoView({ behavior: 'smooth' });
+  }
+
   function sendResume() {
     const input = document.getElementById('resume-input');
     const toast = document.getElementById('resume-toast');
     const button = document.getElementById('send-resume');
     const text = input.value.trim();
-
     if (!text) {
       toast.className = 'toast error';
       toast.textContent = 'Please paste your resume text first.';
@@ -497,20 +816,40 @@
       toast.textContent = 'That looks too short to be a resume. Paste a bit more context.';
       return;
     }
-
     const message = "Here is my background — please use this as context for our conversation:\n\n" + text;
-    const ok = sendToVoiceflow(message);
-
-    if (ok) {
-      toast.className = 'toast success';
-      toast.textContent = '✓ Resume sent to the agent. Check the chat widget.';
-      button.disabled = true;
-      button.textContent = 'Sent';
-    } else {
-      toast.className = 'toast error';
-      toast.textContent = 'The chat widget isn\'t loaded yet. Please wait a moment and try again.';
-    }
+    handleUserMessage(message);
+    toast.className = 'toast success';
+    toast.textContent = '✓ Resume sent to the agent. Check the chat above.';
+    button.disabled = true;
+    button.textContent = 'Sent';
+    document.getElementById('agent').scrollIntoView({ behavior: 'smooth' });
   }
+
+  async function resetConversation() {
+    if (!confirm('Start a new conversation? Your current chat will be cleared.')) return;
+    document.getElementById('chat-messages').innerHTML = '';
+    localStorage.removeItem('vf_user_id');
+    location.reload();
+  }
+
+  // ============================================================
+  // Initialize on load
+  // ============================================================
+  window.addEventListener('DOMContentLoaded', async function() {
+    const input = document.getElementById('chat-input');
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        handleUserMessage(input.value);
+      }
+    });
+
+    // Send launch action to start the conversation
+    setTyping(true);
+    const traces = await callVoiceflow({ type: 'launch' });
+    setTyping(false);
+    handleResponse(traces);
+  });
 </script>
 
 </body>
