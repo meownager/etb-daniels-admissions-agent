@@ -330,13 +330,24 @@
   <section id="agent">
     <h2>Talk to the Agent <span class="small">— text or voice, your choice</span></h2>
     <div class="agent-box">
-      <!-- VOICEFLOW_EMBED_HERE -->
-      <!-- Replace the placeholder below with the Voiceflow embed snippet from Phase G. -->
-      <p class="agent-placeholder">
-        <strong>Voice agent loading soon</strong>
-        Check back when the demo is published.<br>
-        The widget will support both typed messages and spoken voice (microphone icon).
-      </p>
+      <!-- Voiceflow chat widget -->
+      <script type="text/javascript">
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+              window.voiceflow.chat.load({
+                verify: { projectID: '69ee5ef492c73141d459180c' },
+                url: 'https://general-runtime.voiceflow.com',
+                versionID: 'production',
+                voice: {
+                  url: "https://runtime-api.voiceflow.com"
+                }
+              });
+            }
+            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+      </script>
+      <p style="color: #555; font-style: italic; font-size: 0.9rem;">Click the chat bubble (bottom-right) to start a conversation. Or use a Quick Start prompt below.</p>
     </div>
   </section>
 
