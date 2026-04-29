@@ -647,7 +647,7 @@
   // ⚠️ Replace this placeholder with your real Voiceflow Dialog Manager API key.
   //    Format: VF.DM.xxxxxxxxxxxxxxxx
   //    Get it from: Voiceflow → Settings → API Keys
-  const VF_API_KEY = 'VF.DM.69f15c470545c03db88d8d42.kj9eOTabetFYp6vL';
+  const VF_API_KEY = 'VF.DM.69f283e112a34fad1ed62d2d.wtgUmIXuAuQo874S';
   const VF_VERSION_ID = 'production';
 
   // Generate or retrieve a stable user ID for this browser
@@ -733,7 +733,17 @@
       if (!response.ok) {
         throw new Error('HTTP ' + response.status + ' — ' + (await response.text()));
       }
-      return await response.json();
+      const traces = await response.json();
+      // Detect Voiceflow credit limit warning and show friendly message
+      const creditLimit = Array.isArray(traces) && traces.some(function(t) {
+        return t && t.payload && (t.payload.type === 'credit_limit_reached' ||
+               (typeof t.payload.message === 'string' && t.payload.message.indexOf('credit') >= 0 && t.payload.message.indexOf('limit') >= 0));
+      });
+      if (creditLimit) {
+        addMessage('⚠️ Demo paused — daily Voiceflow credit limit reached. The agent will respond again once credits reset. In the meantime, see GitHub repo for full architecture and LangSmith trace evidence.', 'agent');
+        return [];
+      }
+      return traces;
     } catch (err) {
       console.error('Voiceflow API error:', err);
       addMessage('Sorry, I had trouble reaching the agent. (' + err.message + ')', 'agent');
@@ -840,6 +850,13 @@
     const toast = document.getElementById('resume-toast');
     const button = document.getElementById('send-resume');
     const text = input.value.trim();
+
+    // Guardrail: once per session — prevents repeat uploads burning credits
+    if (sessionStorage.getItem('vf_resume_sent') === 'true') {
+      toast.className = 'toast error';
+      toast.textContent = 'Resume already sent for this session. Refresh the page to upload another.';
+      return;
+    }
     if (!text) {
       toast.className = 'toast error';
       toast.textContent = 'Please paste your resume text first.';
@@ -850,9 +867,15 @@
       toast.textContent = 'That looks too short to be a resume. Paste a bit more context.';
       return;
     }
+    // Guardrail: hard cap on raw input size — block obviously oversized texts
+    if (text.length > 10000) {
+      toast.className = 'toast error';
+      toast.textContent = 'Resume too large (max 10,000 chars before truncation). Upload a shorter version.';
+      return;
+    }
 
     // Truncate if too long — Voiceflow API has payload limits
-    const MAX_RESUME_CHARS = 3000;
+    const MAX_RESUME_CHARS = 1500;
     let resumeText = text;
     if (resumeText.length > MAX_RESUME_CHARS) {
       resumeText = resumeText.substring(0, MAX_RESUME_CHARS) + ' [truncated]';
@@ -865,6 +888,7 @@
     toast.textContent = '✓ Resume sent. The agent will respond based on your background.';
     button.disabled = true;
     button.textContent = 'Sent';
+    sessionStorage.setItem('vf_resume_sent', 'true');
     document.getElementById('agent').scrollIntoView({ behavior: 'smooth' });
 
     // Send the full resume text silently to Voiceflow as context
@@ -929,7 +953,7 @@
           const pageText = content.items.map(function(item) { return item.str; }).join(' ');
           fullText += pageText + '\n\n';
         }
-        const cleaned = fullText.trim().replace(/\s+/g, ' ').replace(/\n{3,}/g, '\n\n');
+        const cleaned = fullText.replace(/[\u00A0\u2000-\u200B\u202F\uFEFF]/g, ' ').replace(/\s+/g, ' ').replace(/\s*([,;:.])\s*/g, '$1 ').trim();
         textarea.value = cleaned;
         toast.className = 'toast success';
         toast.textContent = '✓ PDF extracted (' + cleaned.length + ' chars). Review the text below, then click "Send to Agent".';
