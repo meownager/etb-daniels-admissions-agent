@@ -874,29 +874,65 @@
       return;
     }
 
-    // Truncate if too long — Voiceflow API has payload limits
-    const MAX_RESUME_CHARS = 1500;
-    let resumeText = text;
-    if (resumeText.length > MAX_RESUME_CHARS) {
-      resumeText = resumeText.substring(0, MAX_RESUME_CHARS) + ' [truncated]';
-    }
+    // Smart compression — extract only key info, NOT the full resume
+    const summary = summarizeResume(text);
 
-    // Render a SHORT placeholder bubble — NOT the full resume text
-    addMessage('📎 Resume uploaded — using as context for this conversation', 'user');
+    // Render a SHORT placeholder bubble — NOT the full resume or summary
+    addMessage('📎 Resume uploaded — using key details as context', 'user');
 
     toast.className = 'toast success';
-    toast.textContent = '✓ Resume sent. The agent will respond based on your background.';
+    toast.textContent = '✓ Resume key details sent. The agent will respond based on your background.';
     button.disabled = true;
     button.textContent = 'Sent';
     sessionStorage.setItem('vf_resume_sent', 'true');
     document.getElementById('agent').scrollIntoView({ behavior: 'smooth' });
 
-    // Send the full resume text silently to Voiceflow as context
+    // Send only the compressed summary to Voiceflow — saves ~60% tokens vs full text
     setTyping(true);
-    const message = "Here is my background — please use this as context for our conversation:\n\n" + resumeText;
+    const message = "User uploaded a resume. Key info extracted: " + summary + " — Use this as context for personalized program recommendations.";
     const traces = await callVoiceflow({ type: 'text', payload: message });
     setTyping(false);
     handleResponse(traces);
+  }
+
+  // ============================================================
+  // Resume summarizer — extracts only key info to minimize tokens
+  // ============================================================
+  function summarizeResume(rawText) {
+    // Aggressive whitespace cleanup
+    let text = rawText.replace(/\s+/g, ' ').trim();
+
+    const parts = [];
+
+    // Take the FIRST ~250 chars — usually has name, contact, headline/summary
+    const head = text.substring(0, 250).trim();
+    parts.push(head);
+
+    const rest = text.substring(250);
+
+    // Extract years of experience pattern
+    const expMatch = rest.match(/(\d+\+?)\s*(years?|yrs?)\s+(of\s+)?(experience|exp)/i);
+    if (expMatch) parts.push('Experience: ' + expMatch[0]);
+
+    // Extract degree pattern (MBA, MS, BS, BA, MA, PhD, B.Tech, M.Tech)
+    const degreeRegex = /\b(MBA|MS|MSc|BS|BSc|BA|MA|PhD|B\.Tech|M\.Tech|Bachelor|Master|Doctorate)\b[^\n.,;]{0,60}/gi;
+    const degrees = (text.match(degreeRegex) || []).slice(0, 2);
+    if (degrees.length) parts.push('Education: ' + degrees.join('; '));
+
+    // Extract obvious role/title keywords from the FULL text (first match)
+    const roleRegex = /\b(Software Engineer|Product Manager|Data Scientist|Data Analyst|Research Assistant|Manager|Consultant|Analyst|Developer|Designer|Founder|CEO|CTO|Director|Lead|Intern|Associate)\b[^\n.,;]{0,30}/gi;
+    const roles = (text.match(roleRegex) || []).slice(0, 3);
+    if (roles.length) parts.push('Roles mentioned: ' + roles.join('; '));
+
+    // Extract common tech/skill keywords
+    const skillRegex = /\b(Python|JavaScript|Java|SQL|React|AWS|Machine Learning|AI|Data Science|Marketing|Finance|Healthcare|Supply Chain|Operations|Sales|HR|Consulting|Engineering|Strategy|Product|Analytics|Excel|Tableau|Salesforce)\b/gi;
+    const skills = Array.from(new Set(text.match(skillRegex) || [])).slice(0, 6);
+    if (skills.length) parts.push('Skills/areas: ' + skills.join(', '));
+
+    // Combine and hard-cap at 500 chars total
+    let summary = parts.join('. ');
+    if (summary.length > 500) summary = summary.substring(0, 500) + '...';
+    return summary;
   }
 
   async function resetConversation() {
