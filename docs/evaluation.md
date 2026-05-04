@@ -1,10 +1,10 @@
 # Evaluation Framework
 
-How I tested the agent — what passed, what initially failed, and what the recovery looked like.
+How We tested the agent — what passed, what initially failed, and what the recovery looked like.
 
 ## Test scenarios
 
-I started with four scenarios pulled from the original April 4 baseline. Two were happy paths (HP1, HP2) that the older version handled, two were failure cases (FC1, FC2) that the older version got wrong. The point of the v3 system prompt + KB rebuild was to keep the happy paths working and recover the two failures.
+We started with four scenarios pulled from the original April 4 baseline. Two were happy paths (HP1, HP2) that the older version handled, two were failure cases (FC1, FC2) that the older version got wrong. The point of the v3 system prompt + KB rebuild was to keep the happy paths working and recover the two failures.
 
 | ID | Type | Input | Expected behavior |
 |----|------|-------|-------------------|
@@ -13,18 +13,18 @@ I started with four scenarios pulled from the original April 4 baseline. Two wer
 | HP2 | Happy path | "I've been working in the supply chain industry for 2 years..." | Slot-fill before routing — ask the deeper-or-different question first |
 | FC2 | Recovered failure | "I'm thinking about going back to school." | Ask grad vs. undergrad first; do not jump to experience or career questions |
 
-## How I ran them
+## How we ran them
 
 Two paths in parallel:
 
 1. **Voiceflow internal test panel** — quick iteration, manual eyeball. Fast feedback when tweaking system prompt rules.
-2. **LangChain pipeline + LangSmith** — for each scenario I tagged the run with `scenario_id` metadata so traces are filterable in the LangSmith dashboard. The `Tracing_LangSmith/` folder has the screenshots + raw JSON exports.
+2. **LangChain pipeline + LangSmith** — for each scenario We tagged the run with `scenario_id` metadata so traces are filterable in the LangSmith dashboard. The `Tracing_LangSmith/` folder has the screenshots + raw JSON exports.
 
 ## Results
 
 All four scenarios pass on the v3 build. Two recovered failure cases now route to the correct chunk every time because of explicit Layer 4 rules (the GMAT-waiver routing rule and the vague-opener rule in Layer 3 Step 1).
 
-## Edge cases I tested by hand
+## Edge cases We tested by hand
 
 - **Off-topic** ("what's the weather?") — agent declines and references the out-of-scope chunk
 - **Profanity** in user input — agent stays professional, doesn't echo
@@ -40,3 +40,7 @@ All four scenarios pass on the v3 build. Two recovered failure cases now route t
 - Concurrent users hitting the live endpoint (Voiceflow free tier limits)
 
 These are noted in `future_work.md` as next steps.
+
+---
+
+*Author: [meownager](https://github.com/meownager)*
